@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: samples-header"></head>
+<body>
+
+<div class="container">
+    <div class="card" style="width: 72rem;">
+        <img class="card-img-top" src="/images/img_1.png">
+        <div class="card-body">
+            <h3 class="card-title">Replay 2023 Demo - Client</h3>
+<!--            <div class="form-group">-->
+<!--                <form action="/kafka", id="sampleform">-->
+<!--                    <p>Message: <input type="text" name="message"/></p>-->
+<!--                    <p><input type="submit" value="Send Message" class="btn btn-primary" />-->
+<!--                </form>-->
+<!--            </div>-->
+        </div>
+    </div>
+    <div class="row" >
+        <div class="col-md-6">
+            <div class="panel panel-default" th:fragment="MessageList" id="MessageData">
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <br/>
+                        <h5>Alerts:</h5>
+                        <table class="table table-striped" id="alert-messages">
+                            <thead>
+                            <tr>
+                                <th scope="col">Time</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Dashboard</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/js/jquery.sse.js"></script>
+<script type="text/javascript" src="/js/alertssse.js"></script>
+<!--<script>-->
+<!--    $("#sampleform").submit(function( event ) {-->
+<!--        event.preventDefault();-->
+
+<!--        var $form = $( this ),-->
+<!--            message = $form.find( "input[name='message']" ).val(),-->
+<!--            url = $form.attr( "action" );-->
+
+<!--        $.ajax({-->
+<!--            'url': url,-->
+<!--            'method':'POST',-->
+<!--            'dataType': 'text',-->
+<!--            'contentType': 'text/plain',-->
+<!--            'data': message,-->
+<!--            success: function(response) {-->
+<!--                // omit, message sent from activities to kafka topic will update-->
+<!--            }-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+<footer th:replace="fragments :: samples-footer"></footer>
+</body>
+</html>

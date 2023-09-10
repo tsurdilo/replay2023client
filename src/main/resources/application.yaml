@@ -8,4 +8,4 @@ spring:
   temporal:
     namespace: default
     connection:
-      target: host.docker.internal:7233
+      target: 127.0.0.1:7233
