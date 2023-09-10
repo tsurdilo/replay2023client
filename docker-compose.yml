@@ -1,0 +1,8 @@
+version: "3.5"
+services:
+  replaydemo-client:
+    build:
+      dockerfile: Dockerfile
+    image: replaydemo-client:latest
+    ports:
+      - 19997:9995

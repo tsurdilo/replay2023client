@@ -1,0 +1,11 @@
+server:
+  port: 9995
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: temporal-replay-2023-demo-client
+  temporal:
+    namespace: default
+    connection:
+      target: host.docker.internal:7233

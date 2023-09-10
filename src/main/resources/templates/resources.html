@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: samples-header"></head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">Registered Worker Resources:</h3>
+            <br/>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <br/>
+                        <div class="inventory_data">
+                            <table class="table table-striped" th:fragment="resources">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Kind</th>
+                                    <th>Type</th>
+                                    <th>Task Queue</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="resource : ${resources}">
+                                    <td th:text="${resource.id}">Id</td>
+                                    <td th:text="${resource.kind}">Kind</td>
+                                    <td th:text="${resource.type}">Type</td>
+                                    <td th:text="${resource.taskqueue}">Task Queue</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments :: samples-footer"></footer>
+</body>
+</html>
