@@ -2,7 +2,12 @@ package io.temporal.replaydemo;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.temporal.client.WorkflowClient;
+import io.temporal.client.WorkflowOptions;
+import io.temporal.client.WorkflowStub;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,15 +21,22 @@ import java.io.IOException;
 public class AlertsController {
     @Autowired EmitterController emitterController;
 
+    @Autowired
+    WorkflowClient client;
+
     @PostMapping("/webhook")
     public ResponseEntity<?> handleWebhook(@RequestBody String payload) {
-        System.out.println("*********** PAYLOAD: " + payload);
         String response = "";
         try {
             JsonNode arrNode = new ObjectMapper().readTree(payload).get("alerts");
             if (arrNode.isArray()) {
                 JsonNode first = arrNode.get(0);
-                response += first.get("labels").get("rulename").asText();
+                if(first.get("labels").has("rulename")) {
+                    response += first.get("labels").get("rulename").asText();
+                }
+                if(first.get("labels").has("alertname")) {
+                    response += first.get("labels").get("alertname").asText();
+                }
                 response += "#" + first.get("startsAt").asText();
                 response += "#" + first.get("dashboardURL").asText();
             }
@@ -35,7 +47,6 @@ public class AlertsController {
         SseEmitter latestEm = emitterController.getLatestEmitter();
 
         try {
-            System.out.println("************ RES: " + response);
             latestEm.send(response);
         } catch (IOException e) {
             latestEm.completeWithError(e);
@@ -53,5 +64,28 @@ public class AlertsController {
         emitter.onTimeout(() -> emitterController.getEmitters().remove(emitter));
 
         return emitter;
+    }
+
+    @PostMapping(
+            value = "/demoone",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.TEXT_HTML_VALUE})
+    ResponseEntity helloSample() {
+        for (int i = 0; i < 20; i++) {
+            WorkflowStub stub =
+                    client.newUntypedWorkflowStub(
+                            "DemoOneWorkflow",
+                            WorkflowOptions.newBuilder()
+                                    .setTaskQueue("DemoTaskQueue")
+                                    .setWorkflowId("TestOneRun" + i)
+                                    .build());
+
+            stub.start();
+        }
+        // pick one and wait for its result....
+        WorkflowStub retStub = client.newUntypedWorkflowStub("TestOneRun1");
+        // block till done....
+        retStub.getResult(String.class);
+        return new ResponseEntity<>("\"Test One Completed....\"", HttpStatus.OK);
     }
 }
