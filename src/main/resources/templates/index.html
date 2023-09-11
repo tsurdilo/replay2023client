@@ -39,25 +39,35 @@
                     <div class="table-responsive">
                         <br/>
                         <h5>Run Demos:</h5>
-                        <div class="form-group">
-                            <form action="/demoone", id="sampleform">
-                                <p><input type="submit" value="Run Demo One" class="btn btn-primary" />
-                            </form>
-                        </div>
-                        <div style="width: 18rem;">
-                            <div>
-                                <div id="result"></div>
+                        <br/>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <form action="/demoone", id="sampleform">
+                                            <p><input type="submit" value="Run Demo One" class="btn btn-primary" id="f1b"/>
+                                        </form>
+                                    </div>
+                                    <div style="width: 18rem;">
+                                        <div>
+                                            <div id="result"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <form action="/demotwo", id="sampleform2">
+                                            <p><input type="submit" value="Run Demo Two" class="btn btn-primary" id="f2b"/>
+                                        </form>
+                                    </div>
+                                    <div style="width: 18rem;">
+                                        <div>
+                                            <div id="result2"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-<!--                        <table class="table table-striped" id="alert-messages">-->
-<!--                            <thead>-->
-<!--                            <tr>-->
-<!--                                <th scope="col">Time</th>-->
-<!--                                <th scope="col">Type</th>-->
-<!--                                <th scope="col">Dashboard</th>-->
-<!--                            </tr>-->
-<!--                            </thead>-->
-<!--                        </table>-->
                     </div>
                 </div>
             </div>

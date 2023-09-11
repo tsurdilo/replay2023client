@@ -71,7 +71,7 @@ public class AlertsController {
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.TEXT_HTML_VALUE})
     ResponseEntity helloSample() {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 30; i++) {
             WorkflowStub stub =
                     client.newUntypedWorkflowStub(
                             "DemoOneWorkflow",
@@ -81,6 +81,11 @@ public class AlertsController {
                                     .build());
 
             stub.start();
+            try {
+                Thread.sleep(500);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         // pick one and wait for its result....
         WorkflowStub retStub = client.newUntypedWorkflowStub("TestOneRun1");
