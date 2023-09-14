@@ -14,4 +14,4 @@ services:
       dockerfile: Dockerfile
     image: replaydemo-client:latest
     ports:
-      - 19997:9995
+      - 19993:9995

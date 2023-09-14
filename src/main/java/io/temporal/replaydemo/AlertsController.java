@@ -99,7 +99,7 @@ public class AlertsController {
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.TEXT_HTML_VALUE})
     ResponseEntity startDemoTwo() {
-        for(int i=0; i<10000; i++) {
+        for(int i=0; i<6000; i++) {
             WorkflowStub stub =
                     client.newUntypedWorkflowStub(
                             "DemoTwoWorkflow",
