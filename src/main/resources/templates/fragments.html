@@ -12,6 +12,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/prism.min.js"></script>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="samples-navbar">
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="localhost:8081/" target="_blank">Web UI</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="localhost:8085/" target="_blank">Grafana</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="https://docs.temporal.io/" target="_blank">Temporal Docs</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="https://github.com/tsurdilo/" target="_blank">Demo Github</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 <footer class="text-center text-lg-start bg-light text-muted" th:fragment="samples-footer">
     <div class="me-5 d-none d-lg-block">
         <a href="https://temporal.io/replay" target="_blank"> Replay 2023 Rocks! </a>

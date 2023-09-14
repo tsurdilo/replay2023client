@@ -8,4 +8,6 @@ spring:
   temporal:
     namespace: default
     connection:
-      target: 127.0.0.1:7233
+      target: host.docker.internal:7233
+    workersAutoDiscovery:
+      packages: io.temporal.replaydemo

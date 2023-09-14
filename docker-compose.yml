@@ -12,6 +12,6 @@ services:
     <<: *logging
     build:
       dockerfile: Dockerfile
-    image: replaydemo-workers:latest
+    image: replaydemo-client:latest
     ports:
       - 19997:9995
