@@ -77,6 +77,7 @@
 <script type="text/javascript" src="/js/jquery.sse.js"></script>
 <script type="text/javascript" src="/js/alertssse.js"></script>
 <script>
+    // demo one form submit
     $("#sampleform").submit(function( event ) {
         event.preventDefault();
 
@@ -88,14 +89,29 @@
             'method':'POST',
             'dataType': 'json',
             'contentType': 'application/json',
-            // 'data':JSON.stringify({
-            //     "firstName": firstName,
-            //     "lastName": lastName
-            // }),
             success: function(response) {
                 $( "#result" ).empty().append( response );
             }
         });
+        $( "#result" ).empty().append( "Started Demo One Executions" );
+    });
+    // demo 2 form submit
+    $("#sampleform2").submit(function( event ) {
+        event.preventDefault();
+
+        var $form = $( this ),
+            url = $form.attr( "action" );
+
+        $.ajax({
+            'url': url,
+            'method':'POST',
+            'dataType': 'json',
+            'contentType': 'application/json',
+            success: function(response) {
+                $( "#result" ).empty().append( response );
+            }
+        });
+        $( "#result" ).empty().append( "Starting Demo Two execution" );
     });
 </script>
 <footer th:replace="fragments :: samples-footer"></footer>

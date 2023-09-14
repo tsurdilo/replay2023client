@@ -70,7 +70,7 @@ public class AlertsController {
             value = "/demoone",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.TEXT_HTML_VALUE})
-    ResponseEntity helloSample() {
+    ResponseEntity startDemoOne() {
         for (int i = 0; i < 30; i++) {
             WorkflowStub stub =
                     client.newUntypedWorkflowStub(
@@ -92,5 +92,30 @@ public class AlertsController {
         // block till done....
         retStub.getResult(String.class);
         return new ResponseEntity<>("\"Test One Completed....\"", HttpStatus.OK);
+    }
+
+    @PostMapping(
+            value = "/demotwo",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.TEXT_HTML_VALUE})
+    ResponseEntity startDemoTwo() {
+        for(int i=0;i<10000;i++) {
+            WorkflowStub stub =
+                    client.newUntypedWorkflowStub(
+                            "DemoTwoWorkflow",
+                            WorkflowOptions.newBuilder()
+                                    .setTaskQueue("DemoTaskQueue")
+                                    .setWorkflowId("TesTwoRun" + i)
+                                    .build());
+
+            stub.start();
+            try {
+                Thread.sleep(500);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        // pick one and wait for its result....
+        return new ResponseEntity<>("\"Demo two workflows all started\"", HttpStatus.OK);
     }
 }
